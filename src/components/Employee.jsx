@@ -3,10 +3,30 @@ import Header from './Header';
 import PropTypes from 'prop-types';
 import Keg from '../models/Keg';
 import KegComponent from './Keg';
+import $ from '../../node_modules/jquery/dist/jquery';
+
+let kegsRefs = [];
+let currentKegs = [];
+
+function setEdit() {
+  $('#editKeg').addClass('fadeOutUp');
+  setTimeout(() => {
+    $('#editKeg').hide();
+  }, 600);
+  let selectedKegIndex = getSelectedKeg($('#selectedKegBrand').val(), $('#selectedKegName').val());
+  if (selectedKegIndex !== -1) {
+    kegsRefs[selectedKegIndex].setEdit();
+  }
+}
+
+function getSelectedKeg(brand, name) {
+  return currentKegs.findIndex(keg => keg.name === name && keg.brand === brand);
+}
 
 function Employee(props) {
+  currentKegs = props.currentKegs;
   let listKegs = props.currentKegs.map((keg, key) => 
-    <KegComponent currentKeg={keg} role="employee" render={true} key={key}/>
+    <KegComponent currentKeg={keg} role="employee" render={true} key={key} ref={(keg) => kegsRefs.push(keg)} />
   );
 
   return (
@@ -30,6 +50,10 @@ function Employee(props) {
           border-bottom: none;
           border-top: none;
         }
+
+        #editKeg {
+          display: none;
+        }
       `}</style>
       <Header />
       <div className="content">
@@ -50,6 +74,21 @@ function Employee(props) {
             {listKegs}
           </tbody>
         </table>
+        <div className="animated fadeInDown" id="editKeg">
+          <input type="text" className="form-control mb-2 name" name="name"/>
+          <input type="text" className="form-control mb-2 brand" name="brand" />
+          <input type="number" className="form-control mb-2 price" name="price" />
+          <input type="number" className="form-control mb-2 alcoholContent" name="alcoholContent" />
+          <select name="onSale" className="form-control onSale">
+            <option value="1">No discount</option>
+            <option value="0.95">5% discount</option>
+            <option value="0.9">10% discount</option>
+            <option value="0.85">15% discount</option>
+          </select>
+          <input type="hidden" id="selectedKegBrand"/>
+          <input type="hidden" id="selectedKegName"/>
+          <button className="btn btn-dark  btn-custom mt-2" onClick={setEdit.bind(this)}>Done</button>
+        </div>
       </div>
     </div>
   );

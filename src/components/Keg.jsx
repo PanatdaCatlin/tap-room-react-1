@@ -2,6 +2,7 @@ import React from 'react';
 import Keg from '../models/Keg.js';
 import PropTypes from 'prop-types';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle';
+import $ from '../../node_modules/jquery/dist/jquery';
 
 class KegComponent extends React.Component {
   constructor(props) {
@@ -24,7 +25,38 @@ class KegComponent extends React.Component {
       if (this.currentKeg.pints >= 4) 
         this.currentKeg.pints -= 4;
     }
-    this.setState({currentKeg: this.currentKeg, render: this.props.render});
+    this.setState({currentKeg: this.currentKeg, render: this.state.render});
+  }
+
+  edit() {
+    $('#editKeg').show();
+    $('#editKeg .name').val(this.state.currentKeg.name);
+    $('#editKeg .brand').val(this.state.currentKeg.brand);
+    $('#editKeg .price').val(this.state.currentKeg.price);
+    $('#editKeg .alcoholContent').val(this.state.currentKeg.alcoholContent);
+    if (this.state.currentKeg.discount === 1) {
+      $('#editKeg .onSale option:nth-child(1)').attr('selected', 'selected');
+    }
+    else if (this.state.currentKeg.discount === 0.95) {
+      $('#editKeg .onSale option:nth-child(2)').attr('selected', 'selected');
+    }
+    else if (this.state.currentKeg.discount === 0.9) {
+      $('#editKeg .onSale option:nth-child(3)').attr('selected', 'selected');
+    }
+    else if (this.state.currentKeg.discount === 0.85) {
+      $('#editKeg .onSale option:nth-child(4)').attr('selected', 'selected');
+    }
+    $('#selectedKegBrand').val(`${this.state.currentKeg.brand}`);
+    $('#selectedKegName').val(`${this.state.currentKeg.name}`);
+  }
+
+  setEdit() {
+    this.currentKeg.name = $('#editKeg .name').val();
+    this.currentKeg.brand = $('#editKeg .brand').val();
+    this.currentKeg.price = parseInt($('#editKeg .price').val());
+    this.currentKeg.alcoholContent = parseFloat($('#editKeg .alcoholContent').val());
+    this.currentKeg.discount = parseInt($('#editKeg .onSale option:selected').val());
+    this.setState({currentKeg: this.currentKeg, render: this.state.render});
   }
 
   sell(amount) {
@@ -40,7 +72,7 @@ class KegComponent extends React.Component {
       if (this.currentKeg.pints >= 4) 
         this.currentKeg.pints -= 4;
     }
-    this.setState({currentKeg: this.currentKeg, render: this.props.render});
+    this.setState({currentKeg: this.currentKeg, render: this.state.render});
   }
 
   delete() {
@@ -69,7 +101,7 @@ class KegComponent extends React.Component {
           <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{this.state.currentKeg.price*this.state.currentKeg.discount}</td> 
           <td><span>{this.state.currentKeg.alcoholContent}%</span></td> 
           <td>{this.state.currentKeg.pints}</td>
-          <td><button className="btn btn-dark btn-custom">Edit</button></td>
+          <td><button className="btn btn-dark btn-custom" onClick={this.edit.bind(this)}>Edit</button></td>
           <td>
             <div className="dropdown">
               <button className="btn btn-dark btn-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sell</button>
