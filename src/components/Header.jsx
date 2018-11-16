@@ -25,7 +25,7 @@ class Header extends React.Component {
         delay: function(el, i) {
           return 500 + 30 * i;
         }
-      })
+      });
   }
 
   render() {

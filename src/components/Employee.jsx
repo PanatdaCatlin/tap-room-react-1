@@ -7,8 +7,8 @@ import KegComponent from './Keg';
 function Employee(props){
   var styles = {
   };
-  var listKegs = props.currentKegs.map((keg) =>
-    <KegComponent currentKeg={keg} role="employee"/>
+  var listKegs = props.currentKegs.map((keg, key) =>
+    <KegComponent currentKeg={keg} role="employee" key={key}/>
   );
   return (
     <div style={styles} className="container">
