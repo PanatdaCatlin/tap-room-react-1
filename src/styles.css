@@ -14,3 +14,12 @@
   background-color: rgba(206, 121, 23, 0.7);
   border: 1px solid rgb(196, 179, 179);
 }
+
+.ml12 {
+  letter-spacing: 0.3em;
+}
+
+.ml12 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
