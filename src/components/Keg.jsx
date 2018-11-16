@@ -8,21 +8,25 @@ class KegComponent extends React.Component {
     super(props);
     this.currentKeg = props.currentKeg;
     this.props = props;
-    this.state = { currentKeg: props.currentKeg };
+    this.state = { currentKeg: props.currentKeg, render: this.props.render };
   }
 
   buy(amount) {
     this.props.buy(amount);
-    this.setState( {currentKeg: this.currentKeg} );
+    this.setState({currentKeg: this.currentKeg, render: this.props.render});
   }
 
   sell(amount) {
     this.props.sell(amount);
-    this.setState( {currentKeg: this.currentKeg });
+    this.setState({currentKeg: this.currentKeg, render: this.props.render});
+  }
+
+  delete() {
+    this.setState({currentKeg: this.currentKeg, render: false});
   }
 
   render() {
-    if (this.props.role === 'employee') {
+    if (this.props.role === 'employee' && this.state.render === true) {
       return (
         <tr>
           <style jsx>{`
@@ -54,11 +58,11 @@ class KegComponent extends React.Component {
               </div>
             </div>
           </td>
-          <td><button className="btn btn-dark btn-custom">Delete</button></td>
+          <td><button className="btn btn-dark btn-custom" onClick={this.delete.bind(this)}>Delete</button></td>
         </tr>
       );
     }
-    else {
+    else if (this.props.role === 'patron' && this.state.render === true) {
       return (
         <tr>
           <style jsx>{`
@@ -95,6 +99,9 @@ class KegComponent extends React.Component {
         </tr>
       );
     }
+    else {
+      return (<tr></tr>);
+    }
   }
 }
 
@@ -103,6 +110,7 @@ KegComponent.propTypes = {
   role: PropTypes.string,
   buy: PropTypes.func,
   sell: PropTypes.func,
+  render: PropTypes.bool,
 };
 
 export default KegComponent;

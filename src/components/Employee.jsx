@@ -7,8 +7,8 @@ import KegComponent from './Keg';
 class Employee extends React.Component {
   constructor(props) {
     super(props);
-    this.listKegs = props.currentKegs.map((keg, key) =>
-      <KegComponent currentKeg={keg} role="employee" sell={this.sell} key={key}/>
+    this.listKegs = props.currentKegs.map((keg, key) => 
+      <KegComponent currentKeg={keg} role="employee" sell={this.sell} render={true} key={key}/>
     );
   }
 
