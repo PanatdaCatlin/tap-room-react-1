@@ -50,6 +50,14 @@ module.exports = {
           ]
         }
       },
+      {
+        test: /\.css$/,
+        loader: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.jpg|jpeg|png$/,
+        loader: 'file-loader'
+      }
     ],
   },
   plugins: [
