@@ -8,16 +8,38 @@ class KegComponent extends React.Component {
     super(props);
     this.currentKeg = props.currentKeg;
     this.props = props;
-    this.state = { currentKeg: props.currentKeg, render: this.props.render };
+    this.state = {currentKeg: this.props.currentKeg, render: this.props.render};
   }
 
   buy(amount) {
-    this.props.buy(amount);
+    if (amount === 'pint') {
+      if (this.currentKeg.pints >= 1)
+        this.currentKeg.pints -= 1;
+    }
+    else if (amount === 'growler') {
+      if (this.currentKeg.pints >= 2)
+        this.currentKeg.pints -= 2;
+    }
+    else {
+      if (this.currentKeg.pints >= 4) 
+        this.currentKeg.pints -= 4;
+    }
     this.setState({currentKeg: this.currentKeg, render: this.props.render});
   }
 
   sell(amount) {
-    this.props.sell(amount);
+    if (amount === 'pint') {
+      if (this.currentKeg.pints >= 1)
+        this.currentKeg.pints -= 1;
+    }
+    else if (amount === 'growler') {
+      if (this.currentKeg.pints >= 2)
+        this.currentKeg.pints -= 2;
+    }
+    else {
+      if (this.currentKeg.pints >= 4) 
+        this.currentKeg.pints -= 4;
+    }
     this.setState({currentKeg: this.currentKeg, render: this.props.render});
   }
 
@@ -109,7 +131,6 @@ KegComponent.propTypes = {
   currentKeg: PropTypes.instanceOf(Keg),
   role: PropTypes.string,
   buy: PropTypes.func,
-  sell: PropTypes.func,
   render: PropTypes.bool,
 };
 
