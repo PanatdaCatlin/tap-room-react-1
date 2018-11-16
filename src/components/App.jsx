@@ -1,14 +1,9 @@
 import React from 'react';
 import Welcome from './Welcome';
-//import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import Patron from './Patron';
 import Keg from '../models/Keg';
-
-/*
-  import { Link } from 'react-router-dom';
-  <Link to="/">Home</Link> | <Link to="/newticket">Create Ticket</Link>
-*/
+import Employee from './Employee';
 
 function App(){
   var styles = {
@@ -25,12 +20,9 @@ function App(){
       <Switch>
         <Route exact path='/' component={Welcome} />
         <Route exact path='/patron' render={(props) => <Patron {...props} currentKegs={currentKegs} />}/>
+        <Route exact path='/employee' render={(props) => <Employee {...props} currentKegs={currentKegs} />}/>
       </Switch>
     </div>
   );
 }
-
-//App.propTypes = {
-//};
-
 export default App;
