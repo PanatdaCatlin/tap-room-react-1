@@ -1,4 +1,5 @@
 import React from 'react';
+import Welcome from './Welcome';
 //import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 
@@ -12,13 +13,9 @@ function App(){
   };
   return (
     <div style={styles}>
-      <style jsx>{`
-        font-family: Helvetica;
-      `}</style>
-      tap-room-react
-      {/* <Switch>
-        <Route exact path='/' component={} />
-      </Switch> */}
+      <Switch>
+        <Route exact path='/' component={Welcome} />
+      </Switch>
     </div>
   );
 }
