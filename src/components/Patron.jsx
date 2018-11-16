@@ -26,6 +26,11 @@ function Patron(props){
           font-family: 'Lora', sans-serif;
           font-weight: 700;
         }
+
+        .table thead th {
+          border-bottom: none;
+          border-top: none;
+        }
       `}</style>
       <Header />
       <div className="content">
