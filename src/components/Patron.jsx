@@ -15,17 +15,16 @@ class Patron extends React.Component {
   buy(amount) {
     if (amount === 'pint') {
       if (this.currentKeg.pints >= 1)
-      this.currentKeg.pints -= 1;
+        this.currentKeg.pints -= 1;
     }
     else if (amount === 'growler') {
       if (this.currentKeg.pints >= 2)
-      this.currentKeg.pints -= 2;
+        this.currentKeg.pints -= 2;
     }
     else {
       if (this.currentKeg.pints >= 4) 
-      this.currentKeg.pints -= 4;
+        this.currentKeg.pints -= 4;
     }
-    console.log(this.currentKeg);
   }
 
   render() {
