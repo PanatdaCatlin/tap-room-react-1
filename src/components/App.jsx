@@ -2,6 +2,7 @@ import React from 'react';
 import Welcome from './Welcome';
 //import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
+import Patron from './Patron';
 
 /*
   import { Link } from 'react-router-dom';
@@ -15,6 +16,7 @@ function App(){
     <div style={styles}>
       <Switch>
         <Route exact path='/' component={Welcome} />
+        <Route exact path='/patron' component={Patron} />
       </Switch>
     </div>
   );
