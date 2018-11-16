@@ -2,7 +2,6 @@ import React from 'react';
 import Keg from '../models/Keg.js';
 import PropTypes from 'prop-types';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle';
-import Patron from './Patron';
 
 class KegComponent extends React.Component {
   constructor(props) {
@@ -15,6 +14,11 @@ class KegComponent extends React.Component {
   buy(amount) {
     this.props.buy(amount);
     this.setState( {currentKeg: this.currentKeg} );
+  }
+
+  sell(amount) {
+    this.props.sell(amount);
+    this.setState( {currentKeg: this.currentKeg });
   }
 
   render() {
@@ -44,9 +48,9 @@ class KegComponent extends React.Component {
             <div className="dropdown">
               <button className="btn btn-dark btn-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sell</button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item">Pint</a>
-                <a className="dropdown-item">Growler</a>
-                <a className="dropdown-item">Large Growler</a>
+                <a className="dropdown-item" onClick={this.sell.bind(this, 'pint')}>Pint</a>
+                <a className="dropdown-item" onClick={this.sell.bind(this, 'growler')}>Growler</a>
+                <a className="dropdown-item" onClick={this.sell.bind(this, 'largeGrowler')}>Large Growler</a>
               </div>
             </div>
           </td>
@@ -98,6 +102,7 @@ KegComponent.propTypes = {
   currentKeg: PropTypes.instanceOf(Keg),
   role: PropTypes.string,
   buy: PropTypes.func,
+  sell: PropTypes.func,
 };
 
 export default KegComponent;
