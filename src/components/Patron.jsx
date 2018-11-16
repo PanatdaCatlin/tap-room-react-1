@@ -8,7 +8,7 @@ function Patron(props){
   var styles = {
   };
   const listKegs = props.currentKegs.map((keg) =>
-    <KegComponent currentKeg={keg} />
+    <KegComponent currentKeg={keg} role="patron"/>
   );
   return (
     <div style={styles} className="container">
