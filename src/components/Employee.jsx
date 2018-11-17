@@ -66,11 +66,11 @@ function Employee(props) {
         <table className="table">
           <thead className="thead">
             <tr className="table-headers">
-              <th scope="col">Name <span>▼</span></th>
-              <th scope="col">Brand <span>▼</span></th>
-              <th scope="col">Price <span>▼</span></th>
-              <th scope="col">Alcohol Content <span>▼</span></th>
-              <th scope="col">Pints Remaining <span>▼</span></th>
+              <th scope="col">Name</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Price</th>
+              <th scope="col">Alcohol Content</th>
+              <th scope="col">Pints Remaining</th>
               <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>

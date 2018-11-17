@@ -55,7 +55,7 @@ class KegComponent extends React.Component {
     this.currentKeg.brand = $('#editKeg .brand').val();
     this.currentKeg.price = parseInt($('#editKeg .price').val());
     this.currentKeg.alcoholContent = parseFloat($('#editKeg .alcoholContent').val());
-    this.currentKeg.discount = parseInt($('#editKeg .onSale option:selected').val());
+    this.currentKeg.discount = parseFloat($('#editKeg .onSale option:selected').val());
     this.setState({currentKeg: this.currentKeg, render: this.state.render});
   }
 
