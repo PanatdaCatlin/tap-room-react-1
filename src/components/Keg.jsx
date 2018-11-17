@@ -29,7 +29,7 @@ class KegComponent extends React.Component {
   }
 
   edit() {
-    $('#editKeg').show();
+    $('#editKeg').removeClass('hide');
     $('#editKeg .name').val(this.state.currentKeg.name);
     $('#editKeg .brand').val(this.state.currentKeg.brand);
     $('#editKeg .price').val(this.state.currentKeg.price);

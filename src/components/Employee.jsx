@@ -11,8 +11,10 @@ let currentKegs = [];
 function setEdit() {
   $('#editKeg').addClass('fadeOutUp');
   setTimeout(() => {
-    $('#editKeg').hide();
+    $('#editKeg').addClass('hide');
+    $('#editKeg').removeClass('fadeOutUp');
   }, 600);
+
   let selectedKegIndex = getSelectedKeg($('#selectedKegBrand').val(), $('#selectedKegName').val());
   if (selectedKegIndex !== -1) {
     kegsRefs[selectedKegIndex].setEdit();
@@ -51,8 +53,12 @@ function Employee(props) {
           border-top: none;
         }
 
-        #editKeg {
+        .hide {
           display: none;
+        }
+
+        .show {
+          display: block;
         }
       `}</style>
       <Header />
@@ -74,7 +80,7 @@ function Employee(props) {
             {listKegs}
           </tbody>
         </table>
-        <div className="animated fadeInDown" id="editKeg">
+        <div className="animated fadeInDown hide" id="editKeg">
           <input type="text" className="form-control mb-2 name" name="name"/>
           <input type="text" className="form-control mb-2 brand" name="brand" />
           <input type="number" className="form-control mb-2 price" name="price" />
