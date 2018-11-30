@@ -12,10 +12,11 @@ function setEdit() {
   $('#editKeg').addClass('fadeOutUp');
   setTimeout(() => {
     $('#editKeg').addClass('hide');
+    $('#kegBtns').removeClass('hide');
     $('#editKeg').removeClass('fadeOutUp');
   }, 600);
 
-  let selectedKegIndex = getSelectedKeg($('#selectedKegBrand').val(), $('#selectedKegName').val());
+  let selectedKegIndex = getSelectedKeg($('.selectedKegBrand').val(), $('.selectedKegName').val());
   if (selectedKegIndex !== -1) {
     kegsRefs[selectedKegIndex].setEdit();
   }
@@ -25,12 +26,29 @@ function getSelectedKeg(brand, name) {
   return currentKegs.findIndex(keg => keg.name === name && keg.brand === brand);
 }
 
+function newKeg() {
+  $('#newKeg').removeClass('hide');
+  $('#kegBtns').addClass('hide');
+}
+
 function Employee(props) {
   currentKegs = props.currentKegs;
   let listKegs = props.currentKegs.map((keg, key) => 
     <KegComponent currentKeg={keg} role="employee" render={true} key={key} ref={(keg) => kegsRefs.push(keg)} />
   );
-
+  function addNewKeg() {
+    let name = $('#newKeg .name').val();
+    let brand = $('#newKeg .brand').val();
+    let price = parseInt($('#newKeg .price').val());
+    let alcoholContent = parseFloat($('#newKeg .alcoholContent').val());
+    props.addNewKeg(name, brand, price, alcoholContent);
+    $('#newKeg').addClass('fadeOutUp');
+    setTimeout(() => {
+      $('#newKeg').addClass('hide');
+      $('#kegBtns').removeClass('hide');
+      $('#newKeg').removeClass('fadeOutUp');
+    }, 600);
+  }
   return (
     <div className="container">
       <style jsx>{`
@@ -91,9 +109,20 @@ function Employee(props) {
             <option value="0.9">10% discount</option>
             <option value="0.85">15% discount</option>
           </select>
-          <input type="hidden" id="selectedKegBrand"/>
-          <input type="hidden" id="selectedKegName"/>
-          <button className="btn btn-dark  btn-custom mt-2" onClick={setEdit.bind(this)}>Done</button>
+          <input type="hidden" className="selectedKegBrand"/>
+          <input type="hidden" className="selectedKegName"/>
+          <button className="btn btn-dark btn-custom mt-2" onClick={setEdit.bind(this)}>Done</button>
+        </div>
+        <div className="animated fadeInDown hide" id="newKeg">
+          <input type="text" className="form-control mb-2 name" name="name" placeholder="Name" />
+          <input type="text" className="form-control mb-2 brand" name="brand" placeholder="Brand" />
+          <input type="number" className="form-control mb-2 price" name="price" placeholder="Price" />
+          <input type="number" className="form-control mb-2 alcoholContent" name="alcoholContent" placeholder="Alcohol Content" />
+          <button className="btn btn-dark btn-custom mt-2" onClick={addNewKeg}>Done</button>
+        </div>
+        <div id="kegBtns">
+          <button className="btn btn-dark btn-custom mr-1" onClick={newKeg}>Add New Keg</button>
+          <button className="btn btn-dark btn-custom">Start Happy Hour</button>
         </div>
       </div>
     </div>
@@ -102,6 +131,7 @@ function Employee(props) {
 
 Employee.propTypes = {
   currentKegs: PropTypes.arrayOf(Keg),
+  addNewKeg: PropTypes.func,
 };
 
 export default Employee;

@@ -30,6 +30,7 @@ class KegComponent extends React.Component {
 
   edit() {
     $('#editKeg').removeClass('hide');
+    $('#kegBtns').addClass('hide');
     $('#editKeg .name').val(this.state.currentKeg.name);
     $('#editKeg .brand').val(this.state.currentKeg.brand);
     $('#editKeg .price').val(this.state.currentKeg.price);
@@ -46,8 +47,8 @@ class KegComponent extends React.Component {
     else if (this.state.currentKeg.discount === 0.85) {
       $('#editKeg .onSale option:nth-child(4)').attr('selected', 'selected');
     }
-    $('#selectedKegBrand').val(`${this.state.currentKeg.brand}`);
-    $('#selectedKegName').val(`${this.state.currentKeg.name}`);
+    $('.selectedKegBrand').val(`${this.state.currentKeg.brand}`);
+    $('.selectedKegName').val(`${this.state.currentKeg.name}`);
   }
 
   setEdit() {
@@ -98,7 +99,7 @@ class KegComponent extends React.Component {
           `}</style>
           <td>{this.state.currentKeg.name}</td>
           <td>{this.state.currentKeg.brand}</td>
-          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{this.state.currentKeg.price*this.state.currentKeg.discount}</td> 
+          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*100)/100}</td> 
           <td><span>{this.state.currentKeg.alcoholContent}%</span></td> 
           <td>{this.state.currentKeg.pints}</td>
           <td><button className="btn btn-dark btn-custom" onClick={this.edit.bind(this)}>Edit</button></td>
