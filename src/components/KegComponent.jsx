@@ -36,16 +36,16 @@ class KegComponent extends React.Component {
     $('#editKeg .price').val(this.state.currentKeg.price);
     $('#editKeg .alcoholContent').val(this.state.currentKeg.alcoholContent);
     if (this.state.currentKeg.discount === 1) {
-      $('#editKeg .onSale option:nth-child(1)').attr('selected', 'selected');
+      $('#editKeg option:nth-child(1)').prop('selected', true);
     }
     else if (this.state.currentKeg.discount === 0.95) {
-      $('#editKeg .onSale option:nth-child(2)').attr('selected', 'selected');
+      $('#editKeg option:nth-child(2)').prop('selected', true);
     }
     else if (this.state.currentKeg.discount === 0.9) {
-      $('#editKeg .onSale option:nth-child(3)').attr('selected', 'selected');
+      $('#editKeg option:nth-child(3)').prop('selected', true);
     }
     else if (this.state.currentKeg.discount === 0.85) {
-      $('#editKeg .onSale option:nth-child(4)').attr('selected', 'selected');
+      $('#editKeg option:nth-child(4)').prop('selected', true);
     }
     $('#editKeg .selectedKegId').val(`${this.state.currentKeg.id}`);
   }
