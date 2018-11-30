@@ -1,5 +1,8 @@
+import { v4 } from 'uuid';
+
 class Keg {
   constructor(name, brand, price, alcoholContent) {
+    this.id = v4();
     this.pints = 124;
     this.priceText = '';
     this.discount = 1;
