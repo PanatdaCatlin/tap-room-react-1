@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import PropTypes from 'prop-types';
 import Keg from '../models/Keg';
-import KegComponent from './Keg';
+import KegComponent from './KegComponent';
 import HappyHour from './HappyHour';
 import $ from '../../node_modules/jquery/dist/jquery';
 

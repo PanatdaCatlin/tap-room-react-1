@@ -1,8 +1,8 @@
 import React from 'react';
-import Keg from '../models/Keg.js';
+import Keg from '../models/Keg';
 import PropTypes from 'prop-types';
-import '../../node_modules/bootstrap/dist/js/bootstrap.bundle';
-import $ from '../../node_modules/jquery/dist/jquery';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import $ from 'jquery';
 
 class KegComponent extends React.Component {
   constructor(props) {
@@ -72,6 +72,15 @@ class KegComponent extends React.Component {
 
   render() {
     let happyHourRate = (this.props.happyHour) ? 0.5:1;
+    let priceText;
+    if (Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100 <= 6) {
+      priceText = (<span className="badge badge-info">$</span>);
+    }
+    else if (Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100 <= 9)
+      priceText = (<span className="badge badge-warning">$$</span>);
+    else {
+      priceText = (<span className="badge badge-danger">$$$</span>);
+    }
     if (this.props.role === 'employee' && this.state.render === true) {
       return (
         <tr>
@@ -90,7 +99,7 @@ class KegComponent extends React.Component {
           `}</style>
           <td>{this.state.currentKeg.name}</td>
           <td>{this.state.currentKeg.brand}</td>
-          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
+          <td>{priceText}&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
           <td><span>{this.state.currentKeg.alcoholContent}%</span></td> 
           <td>{this.state.currentKeg.pints}</td>
           <td><button className="btn btn-dark btn-custom" onClick={this.edit.bind(this)}>Edit</button></td>

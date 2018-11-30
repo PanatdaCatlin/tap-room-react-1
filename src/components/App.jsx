@@ -10,8 +10,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = { currentKegs: [
-      new Keg('Big Wave', 'Kona Brewing Company', 9, 5.5),
-      new Keg('Fat Tire Belgian White', 'New Belgium', 7, 5.2),
+      new Keg('Big Wave', 'Kona Brewing Company', 12, 5.5),
+      new Keg('Fat Tire Belgian White', 'New Belgium', 8, 5.2),
       new Keg('Crisp Apple', 'Angry Orchard', 6, 5.0),
       new Keg('Irish Creme', 'Bailey\'s', 10, 17),
       new Keg('Belgian White', 'Shock Top', 5, 5.2)
@@ -50,7 +50,6 @@ class App extends React.Component {
   endHappyHour() {
     $('#startHappyHourBtn').removeClass('hide');
     $('#endHappyHourBtn').addClass('hide');
-    
     $('#happyHour').removeClass('rollIn');
     $('#happyHour').addClass('rollOut');
     setTimeout(() => {

@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import PropTypes from 'prop-types';
 import Keg from '../models/Keg';
-import KegComponent from './Keg';
+import KegComponent from './KegComponent';
 
 function Patron(props) {
   let listKegs = props.currentKegs.map((keg, key) =>
