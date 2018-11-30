@@ -37,3 +37,23 @@
   background-color: rgb(255, 206, 71);
   color: rgb(255, 255, 255);
 }
+
+.text-default {
+  color: rgb(196, 179, 179);
+}
+
+.text-danger {
+  color: rgb(202, 76, 99)!important;
+}
+
+.text-secondary {
+  color: rgb(25, 173, 187)!important;
+}
+
+.table-headers:hover {
+  cursor: pointer;
+}
+
+.background-sale {
+  background-color: rgba(194, 116, 28, 0.8);
+}

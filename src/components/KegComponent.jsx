@@ -81,6 +81,20 @@ class KegComponent extends React.Component {
     else {
       priceText = (<span className="badge badge-danger">$$$</span>);
     }
+    let alcoholContentClass;
+    if (this.state.currentKeg.alcoholContent > 10) {
+      alcoholContentClass = 'text-danger';
+    }
+    else if (this.state.currentKeg.alcoholContent >  5) {
+      alcoholContentClass = 'text-default';
+    }
+    else {
+      alcoholContentClass = 'text-secondary';
+    }
+    let discountClass = '';
+    if (this.state.currentKeg.discount !== 1) {
+      discountClass = 'background-sale';
+    }
     if (this.props.role === 'employee' && this.state.render === true) {
       return (
         <tr>
@@ -97,13 +111,13 @@ class KegComponent extends React.Component {
               cursor: pointer;
           }
           `}</style>
-          <td>{this.state.currentKeg.name}</td>
-          <td>{this.state.currentKeg.brand}</td>
-          <td>{priceText}&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
-          <td><span>{this.state.currentKeg.alcoholContent}%</span></td> 
-          <td>{this.state.currentKeg.pints}</td>
-          <td><button className="btn btn-dark btn-custom" onClick={this.edit.bind(this)}>Edit</button></td>
-          <td>
+          <td className={discountClass}>{this.state.currentKeg.name}</td>
+          <td className={discountClass}>{this.state.currentKeg.brand}</td>
+          <td className={discountClass}>{priceText}&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
+          <td className={discountClass}><span className={alcoholContentClass}>{this.state.currentKeg.alcoholContent}%</span></td> 
+          <td className={discountClass}>{this.state.currentKeg.pints}</td>
+          <td className={discountClass}><button className="btn btn-dark btn-custom" onClick={this.edit.bind(this)}>Edit</button></td>
+          <td className={discountClass}>
             <div className="dropdown">
               <button className="btn btn-dark btn-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sell</button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -113,7 +127,7 @@ class KegComponent extends React.Component {
               </div>
             </div>
           </td>
-          <td><button className="btn btn-dark btn-custom" onClick={this.delete.bind(this)}>Delete</button></td>
+          <td className={discountClass}><button className="btn btn-dark btn-custom" onClick={this.delete.bind(this)}>Delete</button></td>
         </tr>
       );
     }
