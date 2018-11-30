@@ -24,3 +24,16 @@
   display: inline-block;
   line-height: 1em;
 }
+
+.badge-success {
+  background-color: rgb(25, 173, 187);
+}
+
+.badge-danger {
+  background-color: rgb(202, 76, 99);
+}
+
+.badge-warning {
+  background-color: rgb(255, 206, 71);
+  color: rgb(255, 255, 255);
+}
