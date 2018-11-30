@@ -50,7 +50,12 @@ class App extends React.Component {
   endHappyHour() {
     $('#startHappyHourBtn').removeClass('hide');
     $('#endHappyHourBtn').addClass('hide');
-    this.setState({happyHour: false});
+    
+    $('#happyHour').removeClass('rollIn');
+    $('#happyHour').addClass('rollOut');
+    setTimeout(() => {
+      this.setState({happyHour: false});
+    }, 600);
   }
 
   render() {

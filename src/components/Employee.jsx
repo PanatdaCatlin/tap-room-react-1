@@ -3,6 +3,7 @@ import Header from './Header';
 import PropTypes from 'prop-types';
 import Keg from '../models/Keg';
 import KegComponent from './Keg';
+import HappyHour from './HappyHour';
 import $ from '../../node_modules/jquery/dist/jquery';
 
 function Employee(props) {
@@ -71,7 +72,8 @@ function Employee(props) {
           display: block;
         }
       `}</style>
-      <Header />
+      <Header happyHour={props.happyHour} />
+      <HappyHour happyHour={props.happyHour} />
       <div className="content">
         <table className="table">
           <thead className="thead">

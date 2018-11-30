@@ -1,11 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
 import anime from 'animejs';
+import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.styles = {};
+    this.props = props;
     this.title='Guilty Pleasure';
   }
 
@@ -29,8 +30,9 @@ class Header extends React.Component {
   }
 
   render() {
+    let classes = (this.props.happyHour) ? 'jumbotron': 'jumbotron happyHourMargin';
     return (
-      <div style={this.styles}>
+      <div>
         <style jsx>{`
           .jumbotron {
             margin-top: 20px;
@@ -46,13 +48,22 @@ class Header extends React.Component {
             border-radius: 5px;
             box-shadow: 2px 2px 5px rgb(58, 58, 58);
           }
+
+          .happyHourMargin {
+            margin-bottom: 122px;
+          }
         `}</style>
-        <div className="jumbotron">
+        <div id="header" className={classes}>
           <span className="ml12">{this.title}</span>
         </div>
       </div>
     );
   }
 }
+
+Header.propTypes = {
+  happyHour: PropTypes.bool,
+};
+
 
 export default Header;
