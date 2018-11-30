@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Patron from './Patron';
 import Keg from '../models/Keg';
 import Employee from './Employee';
+import $ from '../../node_modules/jquery/dist/jquery';
 
 class App extends React.Component {
   constructor() {
@@ -14,9 +15,12 @@ class App extends React.Component {
       new Keg('Crisp Apple', 'Angry Orchard', 6, 5.0),
       new Keg('Irish Creme', 'Bailey\'s', 10, 17),
       new Keg('Belgian White', 'Shock Top', 5, 5.2)
-    ]};
+    ], 
+    happyHour: false, };
     this.addNewKeg = this.addNewKeg.bind(this);
     this.setEdit = this.setEdit.bind(this);
+    this.startHappyHour = this.startHappyHour.bind(this);
+    this.endHappyHour = this.endHappyHour.bind(this);
   }
 
   addNewKeg(name, brand, price, alcoholContent) {
@@ -37,13 +41,25 @@ class App extends React.Component {
     this.setState({currentKegs: currentKegsCopy});
   }
 
+  startHappyHour() {
+    $('#startHappyHourBtn').addClass('hide');
+    $('#endHappyHourBtn').removeClass('hide');
+    this.setState({happyHour: true});
+  }
+
+  endHappyHour() {
+    $('#startHappyHourBtn').removeClass('hide');
+    $('#endHappyHourBtn').addClass('hide');
+    this.setState({happyHour: false});
+  }
+
   render() {
     return (
       <div>
         <Switch>
           <Route exact path='/' component={Welcome} />
           <Route exact path='/patron' render={(props) => <Patron {...props} currentKegs={this.state.currentKegs} />}/>
-          <Route exact path='/employee' render={(props) => <Employee {...props} currentKegs={this.state.currentKegs} addNewKeg={this.addNewKeg} setEdit={this.setEdit} />}/>
+          <Route exact path='/employee' render={(props) => <Employee {...props} happyHour={this.state.happyHour} startHappyHour={this.startHappyHour} endHappyHour={this.endHappyHour} currentKegs={this.state.currentKegs} addNewKeg={this.addNewKeg} setEdit={this.setEdit} />}/>
         </Switch>
       </div>
     );

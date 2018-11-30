@@ -71,6 +71,7 @@ class KegComponent extends React.Component {
   }
 
   render() {
+    let happyHourRate = (this.props.happyHour) ? 0.5:1;
     if (this.props.role === 'employee' && this.state.render === true) {
       return (
         <tr>
@@ -89,7 +90,7 @@ class KegComponent extends React.Component {
           `}</style>
           <td>{this.state.currentKeg.name}</td>
           <td>{this.state.currentKeg.brand}</td>
-          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*100)/100}</td> 
+          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
           <td><span>{this.state.currentKeg.alcoholContent}%</span></td> 
           <td>{this.state.currentKeg.pints}</td>
           <td><button className="btn btn-dark btn-custom" onClick={this.edit.bind(this)}>Edit</button></td>
@@ -126,7 +127,7 @@ class KegComponent extends React.Component {
           `}</style>
           <td>{this.state.currentKeg.name}</td>
           <td>{this.state.currentKeg.brand}</td>
-          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{this.state.currentKeg.price*this.state.currentKeg.discount}</td> 
+          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
           <td><span>{this.state.currentKeg.alcoholContent}%</span></td>
           <td>{this.state.currentKeg.pints}</td>
           <td></td>
@@ -155,6 +156,7 @@ KegComponent.propTypes = {
   role: PropTypes.string,
   buy: PropTypes.func,
   render: PropTypes.bool,
+  happyHour: PropTypes.bool,
 };
 
 export default KegComponent;

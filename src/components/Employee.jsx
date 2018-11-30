@@ -24,7 +24,7 @@ function Employee(props) {
   }
 
   let listKegs = props.currentKegs.map((keg) => 
-    <KegComponent currentKeg={keg} role="employee" render={true} key={keg.id} ref={(kegComponent) => kegsRefs.push(kegComponent)} />
+    <KegComponent currentKeg={keg} role="employee" happyHour={props.happyHour} render={true} key={keg.id} ref={(kegComponent) => kegsRefs.push(kegComponent)} />
   );
 
   function addNewKeg() {
@@ -40,6 +40,7 @@ function Employee(props) {
       $('#newKeg').removeClass('fadeOutUp');
     }, 600);
   }
+
   return (
     <div className="container">
       <style jsx>{`
@@ -112,7 +113,8 @@ function Employee(props) {
         </div>
         <div id="kegBtns">
           <button className="btn btn-dark btn-custom mr-1" onClick={newKeg}>Add New Keg</button>
-          <button className="btn btn-dark btn-custom">Start Happy Hour</button>
+          <button id='startHappyHourBtn' className="btn btn-dark btn-custom" onClick={props.startHappyHour}>Start Happy Hour</button>
+          <button id="endHappyHourBtn" className="btn btn-dark btn-custom hide" onClick={props.endHappyHour}>End Happy Hour</button>
         </div>
       </div>
     </div>
@@ -123,6 +125,9 @@ Employee.propTypes = {
   currentKegs: PropTypes.arrayOf(Keg),
   addNewKeg: PropTypes.func,
   setEdit: PropTypes.func,
+  startHappyHour: PropTypes.func,
+  endHappyHour: PropTypes.func,
+  happyHour: PropTypes.bool,
 };
 
 export default Employee;
