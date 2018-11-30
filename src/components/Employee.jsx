@@ -5,41 +5,32 @@ import Keg from '../models/Keg';
 import KegComponent from './Keg';
 import $ from '../../node_modules/jquery/dist/jquery';
 
-let kegsRefs = [];
-let currentKegs = [];
-
-function setEdit() {
-  $('#editKeg').addClass('fadeOutUp');
-  setTimeout(() => {
-    $('#editKeg').addClass('hide');
-    $('#kegBtns').removeClass('hide');
-    $('#editKeg').removeClass('fadeOutUp');
-  }, 600);
-
-  let selectedKegIndex = getSelectedKeg($('.selectedKegBrand').val(), $('.selectedKegName').val());
-  if (selectedKegIndex !== -1) {
-    kegsRefs[selectedKegIndex].setEdit();
-  }
-}
-
-function getSelectedKeg(brand, name) {
-  return currentKegs.findIndex(keg => keg.name === name && keg.brand === brand);
-}
-
-function newKeg() {
-  $('#newKeg').removeClass('hide');
-  $('#kegBtns').addClass('hide');
-}
-
 function Employee(props) {
-  currentKegs = props.currentKegs;
-  let listKegs = props.currentKegs.map((keg, key) => 
-    <KegComponent currentKeg={keg} role="employee" render={true} key={key} ref={(keg) => kegsRefs.push(keg)} />
+  let kegsRefs = [];
+
+  function setEdit() {
+    $('#editKeg').addClass('fadeOutUp');
+    setTimeout(() => {
+      $('#editKeg').addClass('hide');
+      $('#kegBtns').removeClass('hide');
+      $('#editKeg').removeClass('fadeOutUp');
+    }, 600);
+    props.setEdit($('#editKeg .selectedKegId').val(), $('#editKeg .name').val(), $('#editKeg .brand').val(), parseFloat($('#editKeg .price').val()),  parseFloat($('#editKeg .alcoholContent').val()), parseFloat($('#editKeg .onSale option:selected').val()));
+  }
+
+  function newKeg() {
+    $('#newKeg').removeClass('hide');
+    $('#kegBtns').addClass('hide');
+  }
+
+  let listKegs = props.currentKegs.map((keg) => 
+    <KegComponent currentKeg={keg} role="employee" render={true} key={keg.id} ref={(kegComponent) => kegsRefs.push(kegComponent)} />
   );
+
   function addNewKeg() {
     let name = $('#newKeg .name').val();
     let brand = $('#newKeg .brand').val();
-    let price = parseInt($('#newKeg .price').val());
+    let price = parseFloat($('#newKeg .price').val());
     let alcoholContent = parseFloat($('#newKeg .alcoholContent').val());
     props.addNewKeg(name, brand, price, alcoholContent);
     $('#newKeg').addClass('fadeOutUp');
@@ -109,9 +100,8 @@ function Employee(props) {
             <option value="0.9">10% discount</option>
             <option value="0.85">15% discount</option>
           </select>
-          <input type="hidden" className="selectedKegBrand"/>
-          <input type="hidden" className="selectedKegName"/>
-          <button className="btn btn-dark btn-custom mt-2" onClick={setEdit.bind(this)}>Done</button>
+          <input type="hidden" className="selectedKegId" />
+          <button className="btn btn-dark btn-custom mt-2" onClick={setEdit}>Done</button>
         </div>
         <div className="animated fadeInDown hide" id="newKeg">
           <input type="text" className="form-control mb-2 name" name="name" placeholder="Name" />
@@ -132,6 +122,7 @@ function Employee(props) {
 Employee.propTypes = {
   currentKegs: PropTypes.arrayOf(Keg),
   addNewKeg: PropTypes.func,
+  setEdit: PropTypes.func,
 };
 
 export default Employee;

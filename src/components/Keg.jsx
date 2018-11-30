@@ -47,17 +47,7 @@ class KegComponent extends React.Component {
     else if (this.state.currentKeg.discount === 0.85) {
       $('#editKeg .onSale option:nth-child(4)').attr('selected', 'selected');
     }
-    $('.selectedKegBrand').val(`${this.state.currentKeg.brand}`);
-    $('.selectedKegName').val(`${this.state.currentKeg.name}`);
-  }
-
-  setEdit() {
-    this.currentKeg.name = $('#editKeg .name').val();
-    this.currentKeg.brand = $('#editKeg .brand').val();
-    this.currentKeg.price = parseInt($('#editKeg .price').val());
-    this.currentKeg.alcoholContent = parseFloat($('#editKeg .alcoholContent').val());
-    this.currentKeg.discount = parseFloat($('#editKeg .onSale option:selected').val());
-    this.setState({currentKeg: this.currentKeg, render: this.state.render});
+    $('#editKeg .selectedKegId').val(`${this.state.currentKeg.id}`);
   }
 
   sell(amount) {

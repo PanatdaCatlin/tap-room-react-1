@@ -16,6 +16,7 @@ class App extends React.Component {
       new Keg('Belgian White', 'Shock Top', 5, 5.2)
     ]};
     this.addNewKeg = this.addNewKeg.bind(this);
+    this.setEdit = this.setEdit.bind(this);
   }
 
   addNewKeg(name, brand, price, alcoholContent) {
@@ -23,7 +24,17 @@ class App extends React.Component {
     let newKeg = new Keg(name, brand, price, alcoholContent);
     currentKegsCopy.push(newKeg);
     this.setState({currentKegs: currentKegsCopy});
-    
+  }
+
+  setEdit(id, name, brand, price, alcoholContent, discount) {
+    let currentKegsCopy = this.state.currentKegs.slice();
+    let currentKeg = currentKegsCopy.find(keg => keg.id === id);
+    currentKeg.name = name;
+    currentKeg.brand = brand;
+    currentKeg.price = price;
+    currentKeg.alcoholContent = alcoholContent;
+    currentKeg.discount = discount;
+    this.setState({currentKegs: currentKegsCopy});
   }
 
   render() {
@@ -32,7 +43,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={Welcome} />
           <Route exact path='/patron' render={(props) => <Patron {...props} currentKegs={this.state.currentKegs} />}/>
-          <Route exact path='/employee' render={(props) => <Employee {...props} currentKegs={this.state.currentKegs} addNewKeg={this.addNewKeg}/>}/>
+          <Route exact path='/employee' render={(props) => <Employee {...props} currentKegs={this.state.currentKegs} addNewKeg={this.addNewKeg} setEdit={this.setEdit} />}/>
         </Switch>
       </div>
     );
