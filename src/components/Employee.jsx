@@ -10,17 +10,19 @@ class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.setEdit = this.setEdit.bind(this);
-    this.newKeg = this.newKeg.bind(this);
-    this.addNewKeg = this.addNewKeg.bind(this);
+    this.handleSetEdit = this.handleSetEdit.bind(this);
+    this.handleNewKeg = this.handleNewKeg.bind(this);
+    this.handleAddNewKeg = this.handleAddNewKeg.bind(this);
     this.listKegs = props.currentKegs.map((keg) => 
       <KegComponent currentKeg={keg} role="employee" happyHour={props.happyHour} render={true} key={keg.id} />
     );
     this.sortKegs = this.sortKegs.bind(this);
     this.state = { orderColumn: 'name', order: 'ascending' };
+    this.handleEndHappyHour = this.handleEndHappyHour.bind(this);
+    this.handleStartHappyHour = this.handleStartHappyHour.bind(this);
   }
   
-  setEdit() {
+  handleSetEdit() {
     $('#editKeg').addClass('fadeOutUp');
     setTimeout(() => {
       $('#editKeg').addClass('hide');
@@ -30,12 +32,12 @@ class Employee extends React.Component {
     this.props.setEdit($('#editKeg .selectedKegId').val(), $('#editKeg .name').val(), $('#editKeg .brand').val(), parseFloat($('#editKeg .price').val()),  parseFloat($('#editKeg .alcoholContent').val()), parseFloat($('#editKeg .onSale option:selected').val()));
   }
 
-  newKeg() {
+  handleNewKeg() {
     $('#newKeg').removeClass('hide');
     $('#kegBtns').addClass('hide');
   }
   
-  addNewKeg() {
+  handleAddNewKeg() {
     let name = $('#newKeg .name').val();
     let brand = $('#newKeg .brand').val();
     let price = parseFloat($('#newKeg .price').val());
@@ -57,6 +59,14 @@ class Employee extends React.Component {
     else {
       this.setState({ orderColumn: orderColumn, order: 'ascending' });
     }
+  }
+
+  handleEndHappyHour() {
+    this.props.endHappyHour();
+  }
+
+  handleStartHappyHour() {
+    this.props.startHappyHour();
   }
 
   render() {
@@ -123,18 +133,18 @@ class Employee extends React.Component {
               <option value="0.85">15% discount</option>
             </select>
             <input type="hidden" className="selectedKegId" />
-            <button className="btn btn-dark btn-custom mt-2" onClick={this.setEdit}>Done</button>
+            <button className="btn btn-dark btn-custom mt-2" onClick={this.handleSetEdit}>Done</button>
           </div>
           <div className="animated fadeInDown hide" id="newKeg">
             <input type="text" className="form-control mb-2 name" name="name" placeholder="Name" />
             <input type="text" className="form-control mb-2 brand" name="brand" placeholder="Brand" />
             <input type="number" className="form-control mb-2 price" name="price" placeholder="Price" />
             <input type="number" className="form-control mb-2 alcoholContent" name="alcoholContent" placeholder="Alcohol Content" />
-            <button className="btn btn-dark btn-custom mt-2" onClick={this.addNewKeg}>Done</button>
+            <button className="btn btn-dark btn-custom mt-2" onClick={this.handleAddNewKeg}>Done</button>
           </div>
           <div id="kegBtns">
-            <button className="btn btn-dark btn-custom mr-1" onClick={this.newKeg}>Add New Keg</button>
-            {(this.props.happyHour) ? (<button id="endHappyHourBtn" className="btn btn-dark btn-custom" onClick={this.props.endHappyHour}>End Happy Hour</button>) : (<button id='startHappyHourBtn' className="btn btn-dark btn-custom" onClick={this.props.startHappyHour}>Start Happy Hour</button>) }
+            <button className="btn btn-dark btn-custom mr-1" onClick={this.handleNewKeg}>Add New Keg</button>
+            {(this.props.happyHour) ? (<button id="endHappyHourBtn" className="btn btn-dark btn-custom" onClick={this.handleEndHappyHour}>End Happy Hour</button>) : (<button id='startHappyHourBtn' className="btn btn-dark btn-custom" onClick={this.handleStartHappyHour}>Start Happy Hour</button>) }
           </div>
         </div>
       </div>
