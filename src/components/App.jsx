@@ -21,6 +21,7 @@ class App extends React.Component {
     this.setEdit = this.setEdit.bind(this);
     this.startHappyHour = this.startHappyHour.bind(this);
     this.endHappyHour = this.endHappyHour.bind(this);
+    this.sortKegs = this.sortKegs.bind(this);
   }
 
   addNewKeg(name, brand, price, alcoholContent) {
@@ -57,13 +58,32 @@ class App extends React.Component {
     }, 600);
   }
 
+  sortKegs(order, orderColumn) {
+    let currentKegsCopy = this.state.currentKegs.slice();
+    if (order === 'ascending') {
+      currentKegsCopy.sort((kegA, kegB) => {
+        if (kegA[orderColumn] > kegB[orderColumn]) return 1;
+        else if (kegA[orderColumn] === kegB[orderColumn]) return 0;
+        else return -1;
+      });
+    }
+    else {
+      currentKegsCopy.sort((kegA, kegB) => {
+        if (kegA[orderColumn] > kegB[orderColumn]) return -1;
+        else if (kegA[orderColumn] === kegB[orderColumn]) return 0;
+        else return 1;
+      });
+    }
+    this.setState({currentKegs: currentKegsCopy});
+  }
+
   render() {
     return (
       <div>
         <Switch>
           <Route exact path='/' component={Welcome} />
           <Route exact path='/patron' render={(props) => <Patron {...props} currentKegs={this.state.currentKegs} />}/>
-          <Route exact path='/employee' render={(props) => <Employee {...props} happyHour={this.state.happyHour} startHappyHour={this.startHappyHour} endHappyHour={this.endHappyHour} currentKegs={this.state.currentKegs} addNewKeg={this.addNewKeg} setEdit={this.setEdit} />}/>
+          <Route exact path='/employee' render={(props) => <Employee {...props} happyHour={this.state.happyHour} startHappyHour={this.startHappyHour} endHappyHour={this.endHappyHour} currentKegs={this.state.currentKegs} addNewKeg={this.addNewKeg} setEdit={this.setEdit} sortKegs={this.sortKegs} />}/>
         </Switch>
       </div>
     );
