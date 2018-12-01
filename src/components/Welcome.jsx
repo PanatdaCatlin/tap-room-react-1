@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom';
 
 function Welcome(){
   var styles = {
-    height: '100vh',
-    width: '100vw',
+    marginTop: 'calc(450px - 12px)',
   };
   return (
-    <div style={styles} className="d-flex flex-row justify-content-center align-items-center">
-      <style jsx>{`
-      `}</style>
+    <div style={styles} className="d-flex flex-row justify-content-center">
       <Link to="/employee" className="btn btn-dark btn-custom">Employee</Link> | <Link to="/patron" className="btn btn-dark btn-custom">Patron</Link>
     </div>
   );
