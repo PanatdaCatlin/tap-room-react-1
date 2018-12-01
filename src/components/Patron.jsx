@@ -74,7 +74,7 @@ class Patron extends React.Component {
             </thead>
             <tbody>
               {this.props.currentKegs.map((keg) => 
-                <KegComponent currentKeg={keg} role="employee" happyHour={this.props.happyHour} render={true} key={keg.id} />)}
+                <KegComponent currentKeg={keg} role="patron" happyHour={this.props.happyHour} render={true} key={keg.id} />)}
             </tbody>
           </table>
         </div>
