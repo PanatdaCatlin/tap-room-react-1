@@ -148,13 +148,13 @@ class KegComponent extends React.Component {
               cursor: pointer;
           }
           `}</style>
-          <td>{this.state.currentKeg.name}</td>
-          <td>{this.state.currentKeg.brand}</td>
-          <td><span>{this.state.currentKeg.priceText}</span>&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
-          <td><span>{this.state.currentKeg.alcoholContent}%</span></td>
-          <td>{this.state.currentKeg.pints}</td>
-          <td></td>
-          <td>
+          <td className={discountClass}>{this.state.currentKeg.name}</td>
+          <td className={discountClass}>{this.state.currentKeg.brand}</td>
+          <td className={discountClass}><span>{priceText}</span>&nbsp;{Math.round(this.state.currentKeg.price*this.state.currentKeg.discount*happyHourRate*100)/100}</td> 
+          <td className={discountClass}><span className={alcoholContentClass}>{this.state.currentKeg.alcoholContent}%</span></td>
+          <td className={discountClass}>{this.state.currentKeg.pints}</td>
+          <td className={discountClass}></td>
+          <td className={discountClass}>
             <div className="dropdown">
               <button className="btn btn-dark btn-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buy</button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -164,7 +164,7 @@ class KegComponent extends React.Component {
               </div>
             </div>
           </td>
-          <td></td>
+          <td className={discountClass}></td>
         </tr>
       );
     }

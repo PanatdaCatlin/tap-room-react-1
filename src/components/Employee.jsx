@@ -134,8 +134,7 @@ class Employee extends React.Component {
           </div>
           <div id="kegBtns">
             <button className="btn btn-dark btn-custom mr-1" onClick={this.newKeg}>Add New Keg</button>
-            <button id='startHappyHourBtn' className="btn btn-dark btn-custom" onClick={this.props.startHappyHour}>Start Happy Hour</button>
-            <button id="endHappyHourBtn" className="btn btn-dark btn-custom hide" onClick={this.props.endHappyHour}>End Happy Hour</button>
+            {(this.props.happyHour) ? (<button id="endHappyHourBtn" className="btn btn-dark btn-custom" onClick={this.props.endHappyHour}>End Happy Hour</button>) : (<button id='startHappyHourBtn' className="btn btn-dark btn-custom" onClick={this.props.startHappyHour}>Start Happy Hour</button>) }
           </div>
         </div>
       </div>

@@ -43,14 +43,10 @@ class App extends React.Component {
   }
 
   startHappyHour() {
-    $('#startHappyHourBtn').addClass('hide');
-    $('#endHappyHourBtn').removeClass('hide');
     this.setState({happyHour: true});
   }
 
   endHappyHour() {
-    $('#startHappyHourBtn').removeClass('hide');
-    $('#endHappyHourBtn').addClass('hide');
     $('#happyHour').removeClass('rollIn');
     $('#happyHour').addClass('rollOut');
     setTimeout(() => {
@@ -82,7 +78,7 @@ class App extends React.Component {
       <div>
         <Switch>
           <Route exact path='/' component={Welcome} />
-          <Route exact path='/patron' render={(props) => <Patron {...props} currentKegs={this.state.currentKegs} />}/>
+          <Route exact path='/patron' render={(props) => <Patron {...props} currentKegs={this.state.currentKegs} happyHour={this.state.happyHour} sortKegs={this.sortKegs} />}/>
           <Route exact path='/employee' render={(props) => <Employee {...props} happyHour={this.state.happyHour} startHappyHour={this.startHappyHour} endHappyHour={this.endHappyHour} currentKegs={this.state.currentKegs} addNewKeg={this.addNewKeg} setEdit={this.setEdit} sortKegs={this.sortKegs} />}/>
         </Switch>
       </div>
