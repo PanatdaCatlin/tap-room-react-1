@@ -47,7 +47,7 @@ A web application for bars to keep track of their kegs. If user clicks 'Employee
 
 ## Structure
 
-![structure](https://mbzaqq.dm.files.1drv.com/y4mCm5WNGnyueqR8ISXhzlvm0eWM8SZLueGEEf-W4RV84cYM98kI7P6GKmFjs4bNoK31mgcYKnIdLOnOwGtFCc2ur9HB_o6v6Lp5vAGExK9Df3d3DvUsEUs7Jk8AZsbe2SNuxp3ejtgjslBTFhZmx1hBvV6dUd05MdLG8CvHwvvIHILqIx3GZyUmAHcKgHT7x52EEYf6ztXxIuc-oYIdPrHRA?width=960&height=720&cropmode=none)
+![structure](https://mbzaqq.dm.files.1drv.com/y4muSbca4PgnODou4ARoxEHWoiwvRxUlAdlcheYSWTXE2Gv3yci20JzrfdUxYyiNz4dx0WLpR-CJD5l1IrWW2ohwuUprasjSJUY4Fon2BHynOOcH6uhhZQ-dFTmHqzj_ixHtpi9_CK30XDwrRhXvIauGpUocNcIq6ZeV1tpgU8eJmuv2LxgZZOPEgDPlqLV6_XKl9cNHv96ZMhJ0WEoiDFnDw?width=960&height=720&cropmode=none)
 
 ## Technologies Used
 
