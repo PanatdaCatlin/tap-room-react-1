@@ -14,6 +14,9 @@
 
 A web application for bars to keep track of their kegs. If user clicks 'Employee' button, an admin page for employees will be displayed. Employee can sell, edit, and delete kegs. If user clicks 'Patron' button, user can buy kegs.
 
+## Live demo
+[https://tap-room-react.firebaseapp.com/](https://tap-room-react.firebaseapp.com/)
+
 ## Unforeseen issues and questions
 
 * Some components had to be converted into class based component to use state.
